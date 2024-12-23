@@ -1,5 +1,10 @@
 language: generic 
 sudo: required
+addons:
+  apt:
+    packages:
+      - curl
+
 services:
   - docker
 
@@ -7,6 +12,8 @@ before_install:
   - docker build -t complex/react-test -f ./client/Dockerfile.dev ./client
 
 script:
+  - curl --version
+  - echo "Debugging CI Environment"
   - docker run -e CI=true USERNAME/react-test npm test
 
 after_success: 
